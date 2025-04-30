@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: db-webinar
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: webinar
+      POSTGRES_USER: webinar
+      POSTGRES_DB: webinar_db
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@webinar.com
+      PGADMIN_DEFAULT_PASSWORD: 12345
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
